@@ -144,17 +144,6 @@ export default function AuthModal({ open, mode = "login", onClose, onSuccess }) 
           {mode === "signup" && (
             <>
               <input
-                type="text"
-                placeholder="Display Name"
-                className="w-full rounded-md border border-[#E5E7EB] bg-white px-4 py-3 text-[16px]
-                           shadow-[0_4px_0_rgba(0,0,0,0.05)] outline-none placeholder:text-gray-400
-                           focus:border-[#9B4DFF]"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                required
-                autoComplete="name"
-              />
-              <input
                 type="password"
                 placeholder="Confirm Password"
                 className="w-full rounded-md border border-[#E5E7EB] bg-white px-4 py-3 text-[16px]
@@ -164,6 +153,17 @@ export default function AuthModal({ open, mode = "login", onClose, onSuccess }) 
                 onChange={(e) => setPw2(e.target.value)}
                 required
                 autoComplete="new-password"
+              />
+              <input
+                type="text"
+                placeholder="Display Name"
+                className="w-full rounded-md border border-[#E5E7EB] bg-white px-4 py-3 text-[16px]
+                           shadow-[0_4px_0_rgba(0,0,0,0.05)] outline-none placeholder:text-gray-400
+                           focus:border-[#9B4DFF]"
+                value={displayName}
+                onChange={(e) => setDisplayName(e.target.value)}
+                required
+                autoComplete="name"
               />
             </>
           )}
