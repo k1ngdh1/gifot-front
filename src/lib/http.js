@@ -3,7 +3,7 @@ import axios from "axios";
 // ① axios 기본 설정
 const http = axios.create({
   baseURL: import.meta.env.VITE_API_BASE,  // .env.local의 /api
-  withCredentials: import.meta.env.VITE_USE_CREDENTIALS === "true",
+  withCredentials: true,                  // ★ 쿠키 항상 같이 보내기
   timeout: 15000,
 });
 
@@ -36,7 +36,8 @@ http.interceptors.request.use((config) => {
 });
 
 // ③ 응답 인터셉터: 401이면 refresh 시도
-let refreshing = null;
+let refreshing: Promise<string | null> | null = null;
+
 http.interceptors.response.use(
   (res) => res,
   async (err) => {
@@ -50,14 +51,16 @@ http.interceptors.response.use(
       config._retry = true;
 
       if (!refreshing) {
+        // ★ body에 refreshToken 절대 안 넘김 (쿠키만)
         refreshing = http
-          .post(`${PREFIX}/auth/refresh`, {
-            refreshToken: localStorage.getItem("refresh_token"),
-          })
+          .post(`${PREFIX}/auth/refresh`)
           .then(({ data }) => {
             const at = data?.accessToken || data?.access_token;
-            if (at) localStorage.setItem("access_token", at);
-            return at;
+            if (at) {
+              localStorage.setItem("access_token", at);   // 새 access 저장
+              return at;
+            }
+            return null;
           })
           .finally(() => {
             refreshing = null;
