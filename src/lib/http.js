@@ -74,6 +74,11 @@ http.interceptors.response.use(
         return http(config);
       }
     }
+    if (typeof window !== "undefined") {
+      window.__http = http;    // 전역 디버그 핸들
+      window.__PREFIX = PREFIX;
+    }
+    
     return Promise.reject(err);
   }
 );
