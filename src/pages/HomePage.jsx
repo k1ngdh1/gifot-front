@@ -13,7 +13,7 @@ export default function HomePage() {
   const closeAuth  = () => setAuthOpen(false);
 
   const navigate = useNavigate();
-
+  const { user } = useAuth();
   const handleStart = () => {
     if (!user) {
       alert("로그인이 필요합니다. 먼저 로그인해 주세요. 🥲");
