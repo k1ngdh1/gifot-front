@@ -20,7 +20,7 @@ export default function Navbar({
     try {
       await logout();
       setUser(null);
-      // 필요하면 navigate("/") 등
+      // navigate("/") 필요하면 추가
     } finally {
       setBusy(false);
     }
@@ -54,16 +54,20 @@ export default function Navbar({
             <span className="text-sm text-gray-600">
               {user.displayName || user.email}
             </span>
+            {/* Log In 스타일과 비슷한 Dashboard */}
             <button
-              className="px-3 py-2 rounded border hover:bg-gray-50"
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/workspace")}
+              className="text-[#333] font-medium hover:text-[#4B3DF6] transition-colors"
             >
               Dashboard
             </button>
+            {/* Sign Up 스타일과 비슷한 Logout */}
             <button
-              className="px-3 py-2 rounded bg-gray-900 text-white hover:opacity-90 disabled:opacity-60"
               onClick={doLogout}
               disabled={busy}
+              className="px-4 py-2 rounded-md text-white font-semibold transition-colors
+                         bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6]
+                         hover:opacity-90 disabled:opacity-60"
             >
               {busy ? "…" : "Logout"}
             </button>
