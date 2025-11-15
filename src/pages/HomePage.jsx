@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import HeroSection from "../components/HeroSection";
 import AuthModal from "../components/AuthModal";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../state/auth";
 
 export default function HomePage() {
   const [authOpen, setAuthOpen] = useState(false);
@@ -14,6 +15,7 @@ export default function HomePage() {
 
   const navigate = useNavigate();
   const { user } = useAuth();
+
   const handleStart = () => {
     if (!user) {
       alert("로그인이 필요합니다. 먼저 로그인해 주세요. 🥲");
