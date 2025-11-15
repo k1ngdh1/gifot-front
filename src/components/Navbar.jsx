@@ -18,13 +18,14 @@ export default function Navbar({
     if (busy) return;
     setBusy(true);
     try {
-      await logout();
-      setUser(null);
-      // navigate("/") 필요하면 추가
+      await logout();      // 서버에 로그아웃 요청
+      setUser(null);       // 전역 사용자 상태 비우기
+      navigate("/");       // ★ 홈으로 이동
     } finally {
       setBusy(false);
     }
   };
+  
 
   return (
     <nav className="flex justify-between items-center w-full px-16 py-6 border-b border-gray-200 bg-white">
