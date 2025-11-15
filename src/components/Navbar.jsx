@@ -57,7 +57,9 @@ export default function Navbar({
             {/* Log In 스타일과 비슷한 Dashboard */}
             <button
               onClick={() => navigate("/workspace")}
-              className="text-[#333] font-medium hover:text-[#4B3DF6] transition-colors"
+              className="px-4 py-2 rounded-md border border-black
+                         text-[#333] font-medium
+                         hover:bg-gray-50 transition-colors"
             >
               Dashboard
             </button>
@@ -65,9 +67,9 @@ export default function Navbar({
             <button
               onClick={doLogout}
               disabled={busy}
-              className="px-4 py-2 rounded-md text-white font-semibold transition-colors
-                         bg-gradient-to-r from-[#8B5CF6] to-[#3B82F6]
-                         hover:opacity-90 disabled:opacity-60"
+              className="px-4 py-2 rounded-md text-white font-semibold
+                         bg-black hover:bg-gray-900
+                         transition-colors disabled:opacity-60"
             >
               {busy ? "…" : "Logout"}
             </button>
